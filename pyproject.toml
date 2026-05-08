@@ -1,0 +1,128 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "genesys-mcp"
+version = "0.1.0"
+description = "Vendor-neutral Model Context Protocol server for Genesys Cloud."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Digital Vanguard Solutions" },
+]
+keywords = ["mcp", "model-context-protocol", "genesys", "genesys-cloud", "ai", "agents"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "mcp>=1.2.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    "structlog>=24.4.0",
+    "httpx>=0.28.0",
+    "opentelemetry-api>=1.28.0",
+    "opentelemetry-sdk>=1.28.0",
+    "uvicorn>=0.32.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/digitalvanguardsolutions/genesys-mcp"
+Repository = "https://github.com/digitalvanguardsolutions/genesys-mcp"
+Issues = "https://github.com/digitalvanguardsolutions/genesys-mcp/issues"
+
+[project.optional-dependencies]
+otlp = [
+    "opentelemetry-exporter-otlp>=1.28.0",
+]
+dev = [
+    "ruff>=0.8.0",
+    "mypy>=1.13.0",
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "pre-commit>=4.0.0",
+]
+
+[project.scripts]
+genesys-mcp = "genesys_mcp.cli:main"
+
+[project.entry-points."genesys_mcp.plugins"]
+
+[project.entry-points."genesys_mcp.license"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/genesys_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/genesys_mcp",
+    "tests",
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "N",
+    "B",
+    "UP",
+    "C4",
+    "SIM",
+    "RUF",
+]
+ignore = [
+    "B008",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["B017", "SIM117"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+pretty = true
+show_error_codes = true
+warn_unreachable = true
+warn_unused_ignores = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+addopts = ["--strict-markers", "--strict-config", "-ra"]
+testpaths = ["tests"]
+markers = [
+    "slow: tests that take more than a second",
+]
+
+[tool.coverage.run]
+source = ["src/genesys_mcp"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
