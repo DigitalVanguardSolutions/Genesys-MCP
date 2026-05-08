@@ -1,0 +1,49 @@
+# ─────────────────────────────────────────────────────────────────
+# Forge AI development workbench — local only, never committed.
+# These files orient Claude Code (and other AI tools) in this repo
+# but are not part of the Genesys MCP project itself.
+# ─────────────────────────────────────────────────────────────────
+.claude/
+docs/
+templates/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Node.js
+node_modules/
+.npm
+*.tsbuildinfo
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
