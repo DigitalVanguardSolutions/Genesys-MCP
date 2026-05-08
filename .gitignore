@@ -1,8 +1,3 @@
-# ─────────────────────────────────────────────────────────────────
-# Forge AI development workbench — local only, never committed.
-# These files orient Claude Code (and other AI tools) in this repo
-# but are not part of the Genesys MCP project itself.
-# ─────────────────────────────────────────────────────────────────
 .claude/
 docs/
 templates/
